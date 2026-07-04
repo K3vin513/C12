@@ -38,7 +38,9 @@ function saveWeek(){
                        && numFilas <= 5;
     const condition = Math.abs(first - oldFirst) == 1 
                       && first > oldFirst  
-                      || oldFirst =="";
+                      || oldFirst ==""
+                      || oldFirst == 30 && first == 1
+                      || oldFirst == 31 && first == 1;
 
 
 
@@ -323,17 +325,17 @@ function setQuantity(value, fruit) {
     if(fruit == "Man.Base"){
 
        if(value >= 39 && value <= 55 ){
-          result = (value * 22.27) + ficAlViv + descTra;
+          result = (value * 22.99) + ficAlViv + descTra;
          return result;
        }
        else if(value < 39){
-            result = 809.82 + ficAlViv + descTra;
+            result = 827.82 + ficAlViv + descTra;
             return result;
        }
        else {
            const sum = value - 55;
            console.log(sum);
-           result = (sum * 33.4) + (55 * 22.27) + ficAlViv + descTra;
+           result = (sum * 34.49) + (55 * 22.99) + ficAlViv + descTra;
            return result;
        }
     }
@@ -341,12 +343,12 @@ function setQuantity(value, fruit) {
 
     if (fruit == "Nar.Base"){
        if(value <= 75){
-          result = (value * 16.70) + ficAlViv + descTra;
+          result = (value * 17.24) + ficAlViv + descTra;
          return result;
        }
        else {
            const sum = value - 75;
-           result = (sum * 25.05) + (75 * 16.70) + ficAlViv + descTra;
+           result = (sum * 25.87) + (75 * 17.24) + ficAlViv + descTra;
            return result;
        }
     }
@@ -407,7 +409,7 @@ else{
 
 function discountsFinal(resultFinalEspecial){
 
-    const menores = localStorage.getItem("descuentoHijos");
+    const menores = Number(localStorage.getItem("descuentoHijos"));
     const matrimonio = localStorage.getItem("matrimonio");
     const concubinato = localStorage.getItem("concubinato");
     const manutención = localStorage.getItem("manutención");
@@ -416,16 +418,16 @@ function discountsFinal(resultFinalEspecial){
 
     console.log("Descuentos aplicados: " + menores + ", " + matrimonio + ", " + concubinato + ", " + manutención);
 
-    if(menores == "negativo" && matrimonio == "negativo" && concubinato == "negativo" && manutención == "negativo"){
+    if(menores == 0 && matrimonio == "negativo" && concubinato == "negativo" && manutención == "negativo"){
         return (resultFinalEspecial * 0.985);
         alert("No se aplican descuentos finales");
     }
 
-    if(menores == "positivo" && (matrimonio == "positivo" || concubinato == "positivo")){
+    if(menores > 0 && (matrimonio == "positivo" || concubinato == "positivo")){
         return resultFinalEspecial * 0.95;
     } 
 
-    if (menores == "positivo" ){
+    if (menores > 0){
         return resultFinalEspecial * 0.97;
     }
 
