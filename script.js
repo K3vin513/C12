@@ -151,7 +151,10 @@ function getNegative(){
 
     const condition = Math.abs(first - oldFirst) == 1 &&
                       first > oldFirst || 
-                      oldFirst == "";
+                      oldFirst == ""
+                      || oldFirst == 30 && first == 1
+                      || oldFirst == 31 && first == 1;
+                      ;
 
     const condition1 = Math.abs(first - oldFirst) > 1 &&
                        oldFirst != "" 
